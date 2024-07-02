@@ -51,22 +51,31 @@ function App() {
 
         // Export json file from 'https://particles.js.org/' and save as particles.json in the 'public' folder to set the background. Can also directly modify options in that file.
         const fetchParticlesOptions = async () => {
-            const response = await fetch('./particles.json');
-            const result = await response.json();
-            console.log(result);
-            setParticlesOptions(result);
+            try {
+                // process.env.PUBLIC_URL will be empty in development and the project's base url in production, otherwise the file was not accessible after deployment
+                const response = await fetch(`${process.env.PUBLIC_URL}/particles.json`);
+                const result = await response.json();
+                setParticlesOptions(result);
+            } catch (error) {
+                console.error("Failed to fetch particles options:", error);
+            }
         }
-        fetchParticlesOptions();
 
+        fetchParticlesOptions();
         
         // --------- START PARTICLES ENGINE --------- //
 
         const startParticles = async () => {
-            await initParticlesEngine(async (engine) => {
+            try {
+                await initParticlesEngine(async (engine) => {
                 await loadAll(engine);
-            });
-            setInit(true);
+                });
+                setInit(true);
+            } catch (error) {
+                console.error("Failed to start particles engine:", error);
+            }
         }
+
         startParticles();
     },[]);
 
