@@ -13,6 +13,8 @@ import './App.css';
 
 function App() {
 
+    const server = 'https://facerecognitionbrain-api-b1b912db2942.herokuapp.com/';
+
     const initialState = {
         id: '',
         name: '',
@@ -103,7 +105,7 @@ function App() {
             // ------ Send request to SERVER to fetch Clairifai API data ------ //
             // ---------------------------------------------------------------- //
 
-            const response = await fetch('http://localhost:3001/imageurl', {
+            const response = await fetch(server + 'imageurl', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({
@@ -119,7 +121,7 @@ function App() {
             // ---------------------------------------------------------------- //
 
             if (regions) {
-                const image = await fetch('http://localhost:3001/image', {
+                const image = await fetch(server + 'image', {
                     method: 'PUT',
                     headers: {'Content-Type': 'application/json'},
                     body: JSON.stringify({
@@ -231,8 +233,8 @@ function App() {
                     </div>
                     : (
                         route === 'SignIn'
-                        ? <SignIn onRouteChange={onRouteChange} loadUser={loadUser}/>
-                        : <Register onRouteChange={onRouteChange} loadUser={loadUser}/>
+                        ? <SignIn onRouteChange={onRouteChange} loadUser={loadUser} server={server}/>
+                        : <Register onRouteChange={onRouteChange} loadUser={loadUser} server={server}/>
                     )
                 }
             </div>

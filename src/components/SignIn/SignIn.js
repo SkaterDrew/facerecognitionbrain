@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 // convert into smart component that has state (without hooks)
 
-const SignIn = ({ onRouteChange, loadUser }) => {
+const SignIn = ({ onRouteChange, loadUser, server }) => {
     
     const [ signInEmail, setSignInEmail ] = useState('');
     const [ signInPassword, setSignInPassword ] = useState('');
@@ -23,7 +23,7 @@ const SignIn = ({ onRouteChange, loadUser }) => {
 
         try {
             // send the POST request
-            const response = await fetch('http://localhost:3001/signin', {
+            const response = await fetch(server + 'signin', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({

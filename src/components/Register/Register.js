@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const Register = ({ onRouteChange, loadUser }) => {
+const Register = ({ onRouteChange, loadUser, server }) => {
     
     const [ signInName, setSignInName ] = useState('');
     const [ signInEmail, setSignInEmail ] = useState('');
@@ -25,7 +25,7 @@ const Register = ({ onRouteChange, loadUser }) => {
         event.preventDefault();
 
         // send the POST request to server
-        const response = await fetch('http://localhost:3001/register', {
+        const response = await fetch(server + 'register', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
