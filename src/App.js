@@ -161,7 +161,7 @@ function App() {
         } catch (error) {
             setImageURL('');
             setBoxes([]);
-            setErrorMessage('Please enter a valid image URL');
+            setErrorMessage('Please enter a valid URL of an image with a face');
         }
     }
 
